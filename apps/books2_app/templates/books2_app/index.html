@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>books, again</title>
+	<style type="text/css">
+	table{
+		width: 50%;
+		text-align: center;
+	}
+	</style>
+</head>
+<body>
+	<h1>Add a new course</h1>
+	<form action='/add_course' method='POST'>
+		{% csrf_token %}
+		<p>Name:</p>
+		<input type='text' name='name'>
+		<p>Description:</p>
+		<input type='text' name='description'>
+		<input type='submit' name='submit'>
+	</form>
+	<table>
+	  <tr>
+	    <th>Course Name</th>
+	    <th>Description</th> 
+	    <th>Date Added</th>
+	    <th>Actions</th>
+	  </tr>
+	  {% for course in courses %}
+	  <tr>
+	  	<td>{{course.name}}</td>
+	  	<td>{{course.description.description}}</td>
+	  	<td>{{course.created_at}}</td>
+	  	<td><a href='/delete_course/{{course.id}}'></td>
+	  </tr>
+	  {% endfor %}
+	</table>
+</body>
+</html>
